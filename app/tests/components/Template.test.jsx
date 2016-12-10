@@ -1,5 +1,5 @@
 let React = require('react'),
-    ReactDom = require('react-dom'),
+    ReactDOM = require('react-dom'),
     expect = require('expect'),
     $ = require('jQuery'),
     TestUtils = require('react-addons-test-utils'),
