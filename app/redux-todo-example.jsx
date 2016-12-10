@@ -15,19 +15,33 @@ let reducer = ((state = stateDefault, action) => {
         searchText: action.searchText
       };
     default :
-    return state;
+      return state;
   }
 });
 
-let store = redux.createStore(reducer);
+let store = redux.createStore(reducer, redux.compose(
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));
 
 console.log('current state: ', store.getState());
+
+
+let unsubscribe = store.subscribe(() => {
+  let state = store.getState();
+  document.getElementById('app').innerHTML = state.searchText;
+})
 
 //dispatch the action, takes an obj, always has a type
 store.dispatch({
   type: 'CHANGE_SEARCHTEXT',
   searchText: 'Updated serch text!',
-  showCompleted: true
+});
+
+unsubscribe();
+
+store.dispatch({
+  type: 'CHANGE_SEARCHTEXT',
+  searchText: 'This is Text!!!',
 });
 
 console.log('updated state: ', store.getState());
