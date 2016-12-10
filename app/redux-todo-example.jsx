@@ -37,7 +37,7 @@ store.dispatch({
   searchText: 'Updated serch text!',
 });
 
-unsubscribe();
+// unsubscribe();
 
 store.dispatch({
   type: 'CHANGE_SEARCHTEXT',
