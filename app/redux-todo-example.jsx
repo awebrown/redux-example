@@ -7,13 +7,27 @@ let stateDefault = {
   todos: []
 };
 
-
 let reducer = ((state = stateDefault, action) => {
-  return state;
-})
+  switch(action.type) {
+    case 'CHANGE_SEARCHTEXT' :
+      return {
+        ...state,
+        searchText: action.searchText
+      };
+    default :
+    return state;
+  }
+});
 
 let store = redux.createStore(reducer);
-let currentState = store.getState();
 
+console.log('current state: ', store.getState());
 
-console.log(currentState)
+//dispatch the action, takes an obj, always has a type
+store.dispatch({
+  type: 'CHANGE_SEARCHTEXT',
+  searchText: 'Updated serch text!',
+  showCompleted: true
+});
+
+console.log('updated state: ', store.getState());

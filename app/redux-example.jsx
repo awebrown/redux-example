@@ -7,10 +7,27 @@ console.log('starting redux example');
 
 let reducer = (state = {name: 'Anonymous'}, action) => {
   // state = state || {name: 'Anonymous'};
-  return state;
+
+  console.log('New action: ', action);
+  switch(action.type) {
+    case 'CHANGE_NAME' :
+      return {
+        ...state,
+        name: action.name
+      };
+      default:
+        return state;
+  }
 };
 
 let store = redux.createStore(reducer);
 
-let currentState = store.getState();
-console.log('currentState', currentState);
+console.log('currentState', store.getState());
+
+//all actions need to be objs
+store.dispatch({
+  type: 'CHANGE_NAME',
+  name: 'Tony'
+});
+
+console.log('Name should be Tony', store.getState());
